@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>두뇌 쑥쑥! 숫자 친구들 2048</title>
+    <link rel="stylesheet" href="landing.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#bbada0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="landing-container">
+        <header class="landing-header">
+            <h1 class="main-title">🌟 두뇌 쑥쑥! 숫자 친구들 2048 🌟</h1>
+            <p class="subtitle">머리가 좋아지는 마법의 숫자 여행!</p>
+        </header>
+
+        <main>
+            <section class="hero-section">
+                <div class="hero-content">
+                    <p class="hero-text">친구들 안녕? 👋<br>같은 숫자를 합치면 어떤 숫자가 될까?<br>2048 숫자를 만들러 가볼까요? 🚀</p>
+                    <a href="2048_Number_Game.html" class="play-btn">게임 시작하기! 🎮</a>
+                    <button id="install-btn" class="install-btn" style="display: none;">앱 설치하기 ⬇️</button>
+                </div>
+            </section>
+
+            <section class="rules-section">
+                <h2 class="section-title">✨ 게임 방법 ✨</h2>
+                <div class="rules-card">
+                    <ul class="rules-list">
+                        <li>👆 <strong>위, 아래, 왼쪽, 오른쪽!</strong> <br>방향키나 버튼으로 숫자를 움직여요.</li>
+                        <li>👯 <strong>같은 숫자끼리 만나면?</strong> <br>짜잔! 더 큰 숫자로 변신해요! (2+2=4)</li>
+                        <li>🏆 <strong>2048을 만들면 성공!</strong> <br>누가 누가 더 높은 점수를 얻을까요?</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="landing-footer">
+            <p>설치해서 언제든지 플레이해보세요! 📲</p>
+        </footer>
+    </div>
+
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js');
+            });
+        }
+
+        // PWA Install Logic
+        let deferredPrompt;
+        const installBtn = document.getElementById('install-btn');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'inline-block';
+            console.log('beforeinstallprompt fired');
+        });
+
+        installBtn.addEventListener('click', async () => {
+            if (!deferredPrompt) {
+                return;
+            }
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            deferredPrompt = null;
+            installBtn.style.display = 'none';
+        });
+
+        window.addEventListener('appinstalled', () => {
+            installBtn.style.display = 'none';
+            deferredPrompt = null;
+            console.log('PWA was installed');
+        });
+    </script>
+</body>
+
+</html>

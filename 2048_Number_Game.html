@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 Number Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#bbada0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">2048</h1>
+            <div class="header-row">
+                <div class="scores-container">
+                    <div class="score-box">
+                        <span class="score-label">SCORE:</span> <span id="score">0</span>
+                    </div>
+                    <div class="score-box">
+                        <span class="score-label">BEST:</span> <span id="best-score">0</span>
+                    </div>
+                </div>
+                <button class="rank-btn" id="rank-btn">🏆 Rank</button>
+                <button class="restart-btn" id="restart-btn">New Game</button>
+            </div>
+        </header>
+
+        <div class="game-container">
+            <div class="grid-container">
+                <!-- 16 grid cells background -->
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+            </div>
+            <div class="tile-container" id="tile-container">
+                <!-- Tiles will be injected here by JS -->
+            </div>
+        </div>
+
+        <div class="bottom-controls">
+            <!-- Mobile Controls -->
+            <div class="mobile-controls">
+                <div class="d-pad-row">
+                    <button class="d-pad-btn up-btn" id="btn-up">▲</button>
+                </div>
+                <div class="d-pad-row">
+                    <button class="d-pad-btn left-btn" id="btn-left">◀</button>
+                    <button class="d-pad-btn down-btn" id="btn-down">▼</button>
+                    <button class="d-pad-btn right-btn" id="btn-right">▶</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Modal (Nickname Input) -->
+        <div id="start-modal" class="modal" style="display: flex;">
+            <div class="modal-content">
+                <h2>환영합니다! 👋</h2>
+                <p>랭킹에 등록될 이름을 입력해주세요.</p>
+                <input type="text" id="start-nickname-input" placeholder="닉네임 (10자 이내)" maxlength="10">
+                <button id="start-game-btn" class="modal-btn save">게임 시작</button>
+            </div>
+        </div>
+
+        <!-- Ranking Modal -->
+        <div id="ranking-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" id="close-ranking">&times;</span>
+                <h2>🏆 HALL OF FAME 🏆</h2>
+                <div class="ranking-list" id="ranking-list">
+                    <p>Loading...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over / Save Score Modal -->
+        <div id="save-score-modal" class="modal">
+            <div class="modal-content">
+                <h2>GAME OVER!</h2>
+                <p>수고하셨습니다, <span id="display-nickname" style="font-weight:bold; color:#f1c40f;"></span>님!</p>
+                <p>최종 점수: <span id="final-score">0</span></p>
+                <div class="modal-buttons">
+                    <button id="save-score-btn" class="modal-btn save">랭킹 등록</button>
+                    <button id="skip-save-btn" class="modal-btn cancel">다시 하기</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="rank.js"></script>
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker registration failed: ', err);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>

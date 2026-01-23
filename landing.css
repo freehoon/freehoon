@@ -1,0 +1,198 @@
+:root {
+    --primary-color: #FFD93D;
+    /* Bright Yellow */
+    --secondary-color: #6BCB77;
+    /* Soft Green */
+    --accent-color: #FF6B6B;
+    /* Soft Red */
+    --text-color: #4D96FF;
+    /* Sky Blue for text */
+    --bg-color: #F0F9FF;
+    /* Very light blue bg */
+    --font-main: 'Jua', sans-serif;
+    --font-hand: 'Nanum Pen Script', cursive;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: #444;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.landing-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.landing-header {
+    margin-bottom: 40px;
+    margin-top: 20px;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.main-title {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    text-shadow: 2px 2px 0px #FFF, 4px 4px 0px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-family: var(--font-hand);
+}
+
+.hero-section {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    width: 100%;
+    border: 4px solid var(--primary-color);
+}
+
+.hero-text {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    color: #555;
+    word-break: keep-all;
+}
+
+.play-btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 5px 0 #D43F3F;
+    transition: transform 0.1s, box-shadow 0.1s;
+    margin-bottom: 20px;
+    /* Space between buttons */
+}
+
+.play-btn:active {
+    transform: translateY(5px);
+    box-shadow: none;
+}
+
+.install-btn {
+    display: inline-block;
+    background-color: var(--secondary-color);
+    /* Green */
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 0 5px 0 #4aa956;
+    transition: transform 0.1s, box-shadow 0.1s;
+    margin-top: 10px;
+}
+
+.install-btn:active {
+    transform: translateY(5px);
+    box-shadow: none;
+}
+
+.ios-install-guide {
+    margin-top: 15px;
+    background-color: #E3F2FD;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px dashed #64B5F6;
+    color: #1976D2;
+    font-size: 1rem;
+    line-height: 1.4;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.rules-section {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.section-title {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+}
+
+.rules-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 3px dashed var(--secondary-color);
+}
+
+.rules-list {
+    list-style: none;
+    text-align: left;
+    padding: 0 10px;
+}
+
+.rules-list li {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    padding-left: 10px;
+}
+
+.landing-footer {
+    margin-top: auto;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 400px) {
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+    }
+}
